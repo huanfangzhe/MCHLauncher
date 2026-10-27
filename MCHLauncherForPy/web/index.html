@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<!-- MCHLauncherForPy —— 界面结构
+     开发者：幻方者（https://space.bilibili.com/3546815194467241） -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCHLauncherForPy</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 背景层 -->
+    <div class="bg" aria-hidden="true">
+      <span class="bg-image" id="bgImage"></span>
+      <span class="glow glow-a"></span>
+      <span class="glow glow-b"></span>
+      <span class="glow glow-c"></span>
+      <span class="grain"></span>
+    </div>
+
+    <!-- 侧边导航 -->
+    <aside class="sidebar">
+      <div class="brand drag-region" title="MCHLauncherForPy">
+        <img class="brand-img" src="assets/img/app-icon.png" alt="MCHLauncherForPy" draggable="false"
+             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='assets/img/app-icon.ico';}else{this.style.display='none';this.nextElementSibling.style.display='block';}" />
+        <svg class="brand-fallback" viewBox="0 0 24 24" aria-hidden="true" style="display:none">
+          <path d="M12 2.6 21 7.2v9.6L12 21.4 3 16.8V7.2z" fill="#63b73a" />
+          <path d="M3 7.2 12 11.8v9.6L3 16.8z" fill="#8b5a2b" />
+          <path d="M21 7.2 12 11.8v9.6l9-4.6z" fill="#6a4321" />
+          <path d="M12 2.6 21 7.2 12 11.8 3 7.2z" fill="#7ecb4b" />
+        </svg>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item is-active" type="button" data-target="home" title="首页">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3.6 10.4 12 3.8l8.4 6.6" />
+            <path d="M5.8 9.2V19a1.2 1.2 0 0 0 1.2 1.2h3.2v-5.4h3.6v5.4H17a1.2 1.2 0 0 0 1.2-1.2V9.2" />
+          </svg>
+        </button>
+        <button class="nav-item" type="button" data-target="launch" title="启动">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14.4 4.2c2.6-1 5.4-1 5.4-1s0 2.8-1 5.4c-1 2.7-2.9 4.8-5.4 6.2l-3-3c1.4-2.5 3.5-4.4 6-5.6z" />
+            <path d="M9.6 14.4 5.4 18.6" />
+            <path d="M7.4 12.2 4 13.4l2.4 2.4" />
+            <path d="M11.8 16.6 13 20l2.4-2.4" />
+          </svg>
+        </button>
+        <button class="nav-item" type="button" data-target="bedrock" title="基岩版">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.2 20.4 7.4v9.2L12 20.8 3.6 16.6V7.4z" />
+            <path d="M3.6 7.4 12 11.6l8.4-4.2" />
+            <path d="M12 11.6v9.2" />
+            <path d="M7.8 5.3 16.2 9.5" />
+          </svg>
+        </button>
+        <button class="nav-item" type="button" data-target="download" title="下载">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.6v10" />
+            <path d="M7.8 9.6 12 13.8l4.2-4.2" />
+            <path d="M4.6 16.2v2.4a1.6 1.6 0 0 0 1.6 1.6h11.6a1.6 1.6 0 0 0 1.6-1.6v-2.4" />
+          </svg>
+        </button>
+        <button class="nav-item" type="button" data-target="settings" title="设置">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.2" />
+            <path d="M19.1 14.3a1.5 1.5 0 0 0 .3 1.7l.1.1a1.8 1.8 0 1 1-2.6 2.6l-.1-.1a1.5 1.5 0 0 0-1.7-.3 1.5 1.5 0 0 0-.9 1.4v.2a1.8 1.8 0 1 1-3.6 0v-.1a1.5 1.5 0 0 0-1-1.4 1.5 1.5 0 0 0-1.7.3l-.1.1a1.8 1.8 0 1 1-2.6-2.6l.1-.1a1.5 1.5 0 0 0 .3-1.7 1.5 1.5 0 0 0-1.4-.9h-.2a1.8 1.8 0 1 1 0-3.6h.1a1.5 1.5 0 0 0 1.4-1 1.5 1.5 0 0 0-.3-1.7l-.1-.1a1.8 1.8 0 1 1 2.6-2.6l.1.1a1.5 1.5 0 0 0 1.7.3h.1a1.5 1.5 0 0 0 .9-1.4v-.2a1.8 1.8 0 1 1 3.6 0v.1a1.5 1.5 0 0 0 .9 1.4 1.5 1.5 0 0 0 1.7-.3l.1-.1a1.8 1.8 0 1 1 2.6 2.6l-.1.1a1.5 1.5 0 0 0-.3 1.7v.1a1.5 1.5 0 0 0 1.4.9h.2a1.8 1.8 0 1 1 0 3.6h-.1a1.5 1.5 0 0 0-1.4.9z" />
+          </svg>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot" id="appVersion">v1.1.1</div>
+    </aside>
+
+    <!-- 主区域 -->
+    <main class="main">
+      <header class="topbar drag-region">
+        <div class="win-controls">
+          <button class="win-btn" type="button" id="btnMinimize" title="最小化">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M5.5 12h13" />
+            </svg>
+          </button>
+          <button class="win-btn win-btn-close" type="button" id="btnClose" title="关闭">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="views">
+        <!-- 首页：可自由增删的小组件面板 -->
+        <section class="view view-home is-active" data-view="home">
+          <div class="page-head home-head">
+            <div>
+              <h1>首页</h1>
+            </div>
+            <div class="home-head-actions">
+              <button class="btn-ghost" type="button" id="btnManageWidgets">管理小组件</button>
+            </div>
+          </div>
+          <div class="widget-grid" id="widgetGrid"></div>
+        </section>
+
+        <!-- 启动 -->
+        <section class="view view-launch" data-view="launch">
+          <div class="launch-grid">
+            <!-- 左：账号 -->
+            <section class="launch-card account-card">
+              <div class="account-card-head">
+                <h2 class="launch-card-title">账号</h2>
+                <span class="account-mode" id="accountModeLabel">离线登录</span>
+              </div>
+
+              <div class="account-profile">
+                <div class="avatar account-avatar">
+                  <img class="avatar-img" src="assets/img/steve.png" alt="Steve" draggable="false"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+                  <svg class="avatar-fallback" viewBox="0 0 16 16" shape-rendering="crispEdges"
+                       aria-hidden="true" style="display:none">
+                    <rect x="4" y="1" width="8" height="2" fill="#4aa35c" />
+                    <rect x="3" y="2" width="10" height="2" fill="#3f9450" />
+                    <rect x="2" y="4" width="2" height="5" fill="#337d43" />
+                    <rect x="12" y="4" width="2" height="5" fill="#337d43" />
+                    <rect x="4" y="4" width="8" height="8" fill="#dcae84" />
+                    <rect x="4" y="4" width="8" height="1" fill="#caa077" />
+                    <rect x="5" y="6" width="2" height="2" fill="#fdfdfd" />
+                    <rect x="9" y="6" width="2" height="2" fill="#fdfdfd" />
+                    <rect x="6" y="7" width="1" height="1" fill="#2b3a42" />
+                    <rect x="10" y="7" width="1" height="1" fill="#2b3a42" />
+                    <rect x="7" y="10" width="2" height="1" fill="#a9704c" />
+                    <rect x="4" y="12" width="8" height="2" fill="#2f6f9e" />
+                    <rect x="6" y="12" width="4" height="2" fill="#3d86b8" />
+                  </svg>
+                </div>
+                <div class="account-profile-text">
+                  <div class="player-name" id="playerName">Steve</div>
+                  <div class="account-state" id="accountState">离线登录</div>
+                </div>
+              </div>
+
+              <div class="login-title">选择登录方式</div>
+              <div class="login-options account-login-options" id="loginOptions">
+                <button class="login-opt is-active" type="button" data-login="offline">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="8.4" r="3.6" />
+                    <path d="M4.8 20c.7-3.5 3.6-5.6 7.2-5.6s6.5 2.1 7.2 5.6" />
+                  </svg>
+                  离线登录
+                </button>
+                <button class="login-opt" type="button" data-login="microsoft">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="8.4" height="8.4" fill="#f25022" />
+                    <rect x="12.6" y="3" width="8.4" height="8.4" fill="#7fba00" />
+                    <rect x="3" y="12.6" width="8.4" height="8.4" fill="#00a4ef" />
+                    <rect x="12.6" y="12.6" width="8.4" height="8.4" fill="#ffb900" />
+                  </svg>
+                  微软登录
+                </button>
+                <button class="login-opt" type="button" data-login="authlib">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9.6 14.4a3.2 3.2 0 0 0 4.8 0l2.6-2.6a3.2 3.2 0 0 0-4.5-4.5l-1.2 1.2" />
+                    <path d="M14.4 9.6a3.2 3.2 0 0 0-4.8 0l-2.6 2.6a3.2 3.2 0 0 0 4.5 4.5l1.2-1.2" />
+                  </svg>
+                  第三方登录
+                </button>
+              </div>
+
+              <div class="account-skin-row is-collapsed" id="accountSkinRow">
+                <button class="link-btn" type="button" id="btnChangeSkin">修改皮肤</button>
+                <button class="link-btn" type="button" id="btnExportSkin">导出皮肤</button>
+                <select class="skin-variant is-collapsed" id="skinVariant" title="皮肤模型">
+                  <option value="classic">经典</option>
+                  <option value="slim">纤细</option>
+                </select>
+                <button class="link-btn is-collapsed" type="button" id="btnClearSkin">清除皮肤</button>
+              </div>
+
+              <div class="account-form">
+                <div class="account-name-group" id="offlineNameGroup">
+                  <label class="account-label" for="offlineNameInput">玩家名</label>
+                  <input class="text-input account-name-input" id="offlineNameInput" type="text"
+                         maxlength="16" placeholder="输入离线玩家名" autocomplete="off"
+                         spellcheck="false" />
+                </div>
+
+                <!-- 第三方外置登录：和离线玩家名一样直接放在卡片里 -->
+                <div class="account-authlib-group is-collapsed" id="authlibFormGroup">
+                  <div class="account-field">
+                    <label class="account-label" for="authlibServer">服务器地址</label>
+                    <input class="text-input account-name-input" id="authlibServer" type="text"
+                           placeholder="https://littleskin.cn/api/yggdrasil"
+                           autocomplete="off" spellcheck="false" />
+                  </div>
+                  <div class="account-field">
+                    <label class="account-label" for="authlibUser">账号</label>
+                    <input class="text-input account-name-input" id="authlibUser" type="text"
+                           placeholder="邮箱或用户名" autocomplete="username"
+                           spellcheck="false" />
+                  </div>
+                  <div class="account-field">
+                    <label class="account-label" for="authlibPassword">密码</label>
+                    <input class="text-input account-name-input" id="authlibPassword" type="password"
+                           placeholder="登录密码" autocomplete="current-password" />
+                  </div>
+                  <button class="btn-primary authlib-submit" type="button" id="btnAuthlibSubmit">
+                    登录
+                  </button>
+                  <div class="account-hint authlib-status" id="authlibStatus"></div>
+                </div>
+
+                <div class="account-hint" id="accountHint"></div>
+                <div class="account-logout-row">
+                  <button class="link-btn account-logout is-hidden" id="btnMsLogout" type="button">
+                    退出正版账号
+                  </button>
+                  <button class="link-btn account-logout is-hidden" id="btnAuthlibLogout" type="button">
+                    退出第三方账号
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 右：启动 -->
+            <section class="launch-card launch-card-main">
+              <div class="launch-panel">
+                <div class="launch-panel-head">
+                  <span class="launch-panel-title">准备启动</span>
+                  <span class="launch-panel-state" id="launchStateValue">未选择版本</span>
+                </div>
+
+                <div class="launch-version">
+                  <span class="launch-version-icon" id="launchVersionIcon"></span>
+                  <div class="launch-version-text">
+                    <div class="launch-version-name" id="launchVersionName">未选择版本</div>
+                    <div class="launch-version-meta" id="currentVersion">未选择版本</div>
+                  </div>
+                </div>
+
+                <div class="launch-info">
+                  <div class="launch-info-row">
+                    <span class="launch-info-key">启动 Java</span>
+                    <span class="launch-info-value" id="launchJavaValue">自动选择</span>
+                  </div>
+                  <div class="launch-info-row">
+                    <span class="launch-info-key">分配内存</span>
+                    <span class="launch-info-value" id="launchMemoryValue">8 GB</span>
+                  </div>
+                  <div class="launch-info-row">
+                    <span class="launch-info-key">游戏窗口</span>
+                    <span class="launch-info-value" id="launchWindowValue">默认</span>
+                  </div>
+                </div>
+
+                <button class="btn-primary" type="button" id="btnLaunch">启动游戏</button>
+
+                <div class="launch-actions">
+                  <button class="btn-ghost" type="button" id="btnOpenGameDir">打开目录</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="version-card">
+            <div class="vc-icon" id="cardVersionIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2.6 21 7.2v9.6L12 21.4 3 16.8V7.2z" fill="#63b73a" />
+                <path d="M3 7.2 12 11.8v9.6L3 16.8z" fill="#8b5a2b" />
+                <path d="M21 7.2 12 11.8v9.6l9-4.6z" fill="#6a4321" />
+                <path d="M12 2.6 21 7.2 12 11.8 3 7.2z" fill="#7ecb4b" />
+              </svg>
+            </div>
+            <div class="vc-meta">
+              <div class="vc-name" id="cardVersionName">未选择版本</div>
+              <div class="vc-desc" id="cardVersionDesc">点击“选择版本”开始配置</div>
+            </div>
+            <div class="vc-actions">
+              <button class="link-btn" type="button" id="btnVersionSettings">版本设置</button>
+              <button class="btn-ghost" type="button" id="btnSelectVersion">选择版本</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 基岩版 -->
+        <section class="view view-bedrock" data-view="bedrock">
+          <div class="page-head">
+            <h1>基岩版</h1>
+            <p>Minecraft for Windows（基岩版）的检测、安装与启动</p>
+          </div>
+
+          <div class="cards">
+            <section class="card">
+              <h2 class="card-title">运行状态</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">系统支持</span>
+                  <span class="field-desc" id="bedrockSupportHint">正在检测系统版本…</span>
+                </div>
+                <div class="field-ctrl">
+                  <span class="bedrock-tag" id="bedrockSupportTag">检测中</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">安装状态</span>
+                  <span class="field-desc" id="bedrockInstallHint">正在检测已安装的基岩版…</span>
+                </div>
+                <div class="field-ctrl">
+                  <span class="bedrock-tag" id="bedrockInstallTag">读取中</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本与位置</span>
+                  <span class="field-desc" id="bedrockVersionHint">—</span>
+                </div>
+              </div>
+
+              <div class="bedrock-actions">
+                <button class="btn-primary" type="button" id="btnLaunchBedrock">启动基岩版</button>
+                <button class="btn-ghost" type="button" id="btnRefreshBedrock">重新检测</button>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">安装与更新</h2>
+
+              <div class="bedrock-versions-head">
+                <div class="field-text">
+                  <span class="field-name">选择版本下载</span>
+                  <span class="field-desc" id="bedrockSourceHint">官方渠道只提供最新版本；历史版本来自第三方版本库 mcappx.com</span>
+                </div>
+                <div class="bedrock-version-tools">
+                  <div class="segmented" id="bedrockSourceSwitch">
+                    <button class="seg is-active" type="button" data-source="official">官方最新</button>
+                    <button class="seg" type="button" data-source="mirror">历史版本库</button>
+                  </div>
+                  <button class="btn-ghost" type="button" id="btnRefreshBedrockVersions">刷新</button>
+                </div>
+              </div>
+
+              <div class="dl-toolbar is-collapsed" id="bedrockMirrorTools">
+                <input class="text-input dl-search" id="bedrockMirrorSearch" type="text"
+                       placeholder="搜索版本，例如 1.21.73 / 26.70.21" />
+                <div class="segmented" id="bedrockMirrorTypes">
+                  <button class="seg is-active" type="button" data-type="all">全部</button>
+                  <button class="seg" type="button" data-type="Release">正式版</button>
+                  <button class="seg" type="button" data-type="Preview">预览版</button>
+                  <button class="seg" type="button" data-type="Beta">测试版</button>
+                </div>
+                <div class="segmented" id="bedrockMirrorBuilds">
+                  <button class="seg is-active" type="button" data-build="all">全部包型</button>
+                  <button class="seg" type="button" data-build="UWP">UWP</button>
+                  <button class="seg" type="button" data-build="GDK">GDK</button>
+                </div>
+              </div>
+
+              <div class="dl-list bedrock-version-list" id="bedrockVersionList">
+                <div class="version-empty">正在读取可下载的基岩版版本…</div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">本地安装包</span>
+                  <span class="field-desc">已有 .msix / .msixbundle / .appx 时可以直接安装</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnBedrockLocal">选择文件…</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">商店与账号</span>
+                  <span class="field-desc">需要购买、更新或管理正版账号时使用</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnBedrockStore">打开商店</button>
+                  <button class="btn-ghost" type="button" id="btnBedrockXbox">打开 Xbox</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">安装包缓存</span>
+                  <span class="field-desc" id="bedrockCacheHint">下载的安装包保存在数据目录，可随时清理</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnBedrockDir">打开目录</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">存档目录</span>
+                  <span class="field-desc">安装低于当前版本的旧版本前，建议先备份存档</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnBedrockSaveDir">打开存档目录</button>
+                </div>
+              </div>
+
+              <div class="launch-status dl-status" id="bedrockStatus">
+                <span class="ls-text" id="bedrockStatusText"></span>
+                <span class="ls-bar"><i id="bedrockProgressBar"></i></span>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- 启动进度 -->
+        <section class="view view-launching" data-view="launching">
+          <div class="launching-panel">
+            <h1 id="launchingTitle">正在启动游戏</h1>
+            <p class="launching-version" id="launchingVersion">—</p>
+
+            <div class="launching-bar"><i id="launchingBar"></i></div>
+
+            <div class="launching-meta">
+              <span id="launchingText">正在准备…</span>
+              <span id="launchingElapsed">0 秒</span>
+            </div>
+
+            <pre class="launching-log" id="launchingLog"></pre>
+
+            <div class="launching-actions">
+              <button class="dl-submit dl-submit-danger" type="button" id="btnCancelLaunch">
+                取消启动
+              </button>
+              <button class="btn-ghost btn-log-highlight" type="button" id="btnOpenLaunchLog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 5h16M4 10h10M4 15h16M4 20h10" />
+                </svg>
+                查看日志
+              </button>
+              <button class="btn-ghost" type="button" id="btnBackFromLaunching">返回启动页</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 选择版本 -->
+        <section class="view view-versions" data-view="versions">
+          <div class="page-head version-head">
+            <div>
+              <h1>选择版本</h1>
+              <p>左侧是游戏文件夹（versions 目录），右侧是该文件夹中的版本</p>
+            </div>
+            <div class="version-head-actions">
+              <button class="btn-ghost" type="button" id="btnImportModpack"
+                      title="也可以直接把整合包 zip 拖入窗口">导入整合包</button>
+              <button class="btn-ghost" type="button" id="btnAddVersionRoot">添加文件夹</button>
+              <button class="btn-ghost" type="button" id="btnBackFromVersions">返回</button>
+            </div>
+          </div>
+
+          <div class="versions-layout">
+            <aside class="card root-panel">
+              <h2 class="card-title">游戏文件夹</h2>
+              <div class="root-list" id="rootList"></div>
+            </aside>
+
+            <section class="card version-panel">
+              <div class="version-list" id="versionList">
+                <div class="version-empty">正在读取版本列表…</div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- 下载：游戏版本 / 模组 / 整合包 / 资源包 / 数据包 -->
+        <section class="view view-download" data-view="download">
+          <div class="page-head">
+            <h1>下载</h1>
+            <p>获取游戏版本，以及模组、整合包、资源包和数据包</p>
+          </div>
+
+          <div class="download-tabs" id="downloadTabs">
+            <button class="chip is-active" type="button" data-content="game">游戏版本</button>
+            <button class="chip" type="button" data-content="mod">模组</button>
+            <button class="chip" type="button" data-content="modpack">整合包</button>
+            <button class="chip" type="button" data-content="resourcepack">资源包</button>
+            <button class="chip" type="button" data-content="shaderpack">光影包</button>
+            <button class="chip" type="button" data-content="datapack">数据包</button>
+          </div>
+
+          <div class="cards" id="gameDownloadPanel">
+            <section class="card">
+              <div class="dl-toolbar">
+                <div class="segmented" id="sourceSwitch">
+                  <button class="seg is-active" type="button" data-mirror="0">官方源</button>
+                  <button class="seg" type="button" data-mirror="1">镜像源</button>
+                </div>
+                <input class="text-input dl-search" id="versionSearch" type="text"
+                       placeholder="搜索版本，例如 1.20.1" />
+                <button class="btn-ghost" type="button" id="btnRefreshVersions">刷新</button>
+              </div>
+
+              <div class="filter-row" id="versionFilters">
+                <button class="chip is-active" type="button" data-filter="release">正式版</button>
+                <button class="chip" type="button" data-filter="snapshot">快照</button>
+                <button class="chip" type="button" data-filter="all">全部</button>
+              </div>
+
+              <div class="dl-list" id="downloadList">
+                <div class="version-empty">正在读取版本清单…</div>
+              </div>
+
+              <div class="launch-status dl-status" id="downloadStatus">
+                <span class="ls-text" id="downloadStatusText"></span>
+                <span class="ls-bar"><i id="downloadProgressBar"></i></span>
+              </div>
+            </section>
+          </div>
+
+          <div class="cards is-collapsed" id="contentDownloadPanel">
+            <section class="card">
+              <div class="dl-toolbar">
+                <div class="segmented" id="modSourceSwitch">
+                  <button class="seg is-active" type="button" data-source="all">全部</button>
+                  <button class="seg" type="button" data-source="curseforge">CurseForge</button>
+                  <button class="seg" type="button" data-source="modrinth">Modrinth</button>
+                </div>
+                <input class="text-input dl-search" id="modSearchInput" type="text"
+                       placeholder="搜索模组，例如 JEI / Sodium" />
+                <button class="btn-ghost" type="button" id="btnModSearch">搜索</button>
+              </div>
+
+              <div class="filter-row" id="modLoaderFilters">
+                <button class="chip is-active" type="button" data-loader="">全部</button>
+                <button class="chip" type="button" data-loader="fabric">Fabric</button>
+                <button class="chip" type="button" data-loader="forge">Forge</button>
+                <button class="chip" type="button" data-loader="neoforge">NeoForge</button>
+                <button class="chip" type="button" data-loader="quilt">Quilt</button>
+              </div>
+
+              <div class="dl-list mod-result-list" id="modSearchList">
+                <div class="version-empty">正在读取热门内容…</div>
+              </div>
+
+              <div class="launch-status dl-status" id="modStatus">
+                <span class="ls-text" id="modStatusText"></span>
+                <span class="ls-bar"><i id="modProgressBar"></i></span>
+              </div>
+
+              <div class="mod-more-row">
+                <button class="btn-ghost" type="button" id="btnModMore" hidden>加载更多</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- 版本设置 -->
+        <section class="view view-version" data-view="version">
+          <div class="page-head version-head">
+            <div>
+              <h1 id="versionPageTitle">版本设置</h1>
+              <p id="versionPageSubtitle">—</p>
+            </div>
+            <button class="btn-ghost" type="button" id="btnBackFromVersion">返回</button>
+          </div>
+
+          <div class="vs-layout">
+            <div class="cards">
+              <section class="card" id="vsSectionBase">
+                <h2 class="card-title">基本信息</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本名</span>
+                  <span class="field-desc">修改后版本目录会一并改名</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input vs-name-input" id="vsNameInput" type="text" />
+                  <button class="btn-ghost" type="button" id="btnRenameVersion">保存</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">原版版本</span>
+                  <span class="field-desc">该版本所基于的 Minecraft 版本</span>
+                </div>
+                <div class="field-ctrl">
+                  <code class="path" id="vsMcVersion">—</code>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">模组加载器</span>
+                  <span class="field-desc">为空表示原版</span>
+                </div>
+                <div class="field-ctrl">
+                  <code class="path" id="vsLoader">—</code>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本目录</span>
+                  <span class="field-desc" id="vsDirHint">—</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnOpenVersionDir">打开目录</button>
+                </div>
+              </div>
+
+              <div class="field vs-icon-field">
+                <div class="field-text">
+                  <span class="field-name">版本图标</span>
+                  <span class="field-desc">未指定时按模组加载器自动匹配</span>
+                </div>
+                <div class="field-ctrl vs-icon-ctrl">
+                  <span class="vs-icon-preview" id="vsIconPreview"></span>
+                  <div class="vs-icon-options" id="vsIconOptions">
+                    <button class="vs-icon-choice" type="button" data-icon="auto"
+                            title="自动（按模组加载器）">自动</button>
+                    <button class="vs-icon-choice" type="button" data-icon="grass" title="原版">
+                      <img data-icon-preset="grass" alt="原版图标" />
+                    </button>
+                    <button class="vs-icon-choice" type="button" data-icon="fabric" title="Fabric">
+                      <img data-icon-preset="fabric" alt="Fabric 图标" />
+                    </button>
+                    <button class="vs-icon-choice" type="button" data-icon="forge" title="Forge">
+                      <img data-icon-preset="forge" alt="Forge 图标" />
+                    </button>
+                    <button class="vs-icon-choice" type="button" id="btnUploadVersionIcon"
+                            title="上传自定义图标">上传</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card" id="vsSectionLaunch">
+              <h2 class="card-title">启动设置</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">启动 Java</span>
+                  <span class="field-desc">留空则自动选择符合该版本要求的 Java</span>
+                </div>
+                <div class="field-ctrl">
+                  <select class="vs-java-select" id="vsJavaSelect"></select>
+                  <button class="btn-ghost" type="button" id="btnBrowseJava">浏览…</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">文件校验</span>
+                  <span class="field-desc">启动前检查文件完整性，缺失时自动补全（默认开启）</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" id="vsCheckFiles" checked />
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">最大内存</span>
+                  <span class="field-desc">单位 MB，留空则跟随启动器设置</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input vs-memory-input" id="vsMemory" type="number"
+                         min="512" max="65536" step="512" placeholder="跟随全局" />
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">额外 JVM 参数</span>
+                  <span class="field-desc">空格分隔，例如 -XX:+UseG1GC</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input vs-args-input" id="vsExtraJvm" type="text"
+                         placeholder="可选" />
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">额外游戏参数</span>
+                  <span class="field-desc">空格分隔，例如 -fullscreen</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input vs-args-input" id="vsExtraGame" type="text"
+                         placeholder="可选" />
+                </div>
+              </div>
+
+              <div class="vs-actions">
+                <span class="vs-save-hint" id="vsSettingsHint"></span>
+                <button class="dl-submit vs-save-btn" type="button" id="btnSaveVersionSettings">
+                  保存启动设置
+                </button>
+              </div>
+            </section>
+
+            <section class="card" id="vsModsBlock">
+              <h2 class="card-title">模组</h2>
+              <div class="vs-mods-hint" id="vsModsHint">
+                把 .jar 拖到下方区域，或点击“选择文件”添加
+              </div>
+              <div class="mod-drop" id="modDropZone">
+                <span class="mod-drop-text">拖拽 mod 文件到这里</span>
+                <button class="btn-ghost" type="button" id="btnPickMods">选择文件</button>
+              </div>
+              <div class="mod-list" id="modList"></div>
+              <div class="launch-status dl-status" id="vsStatus">
+                <span class="ls-text" id="vsStatusText"></span>
+                <span class="ls-bar"><i id="vsProgressBar"></i></span>
+              </div>
+            </section>
+            </div>
+
+            <aside class="vs-nav" id="vsNav" aria-label="版本设置板块">
+              <button class="vs-nav-item is-active" type="button"
+                      data-target="vsSectionBase">基本信息</button>
+              <button class="vs-nav-item" type="button"
+                      data-target="vsSectionLaunch">启动设置</button>
+              <button class="vs-nav-item" type="button"
+                      data-target="vsModsBlock">模组</button>
+            </aside>
+          </div>
+        </section>
+
+        <!-- 设置 -->
+        <section class="view view-settings" data-view="settings">
+          <div class="page-head">
+            <h1>设置</h1>
+            <p>启动器与游戏的基础配置项</p>
+          </div>
+
+          <div class="cards">
+            <section class="card">
+              <h2 class="card-title">游戏</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">游戏目录</span>
+                  <span class="field-desc">整合包、存档与资源包的存放位置</span>
+                </div>
+                <div class="field-ctrl">
+                  <code class="path">未设置</code>
+                  <button class="btn-ghost" type="button" data-toast="更改游戏目录功能开发中">更改</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">备选 Java</span>
+                  <span class="field-desc" id="javaSummary">
+                    正在检测 Java…（启动时按版本要求自动选择，可添加多个备选）
+                  </span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnScanJava">自动扫描</button>
+                  <button class="btn-ghost" type="button" id="btnPickJava">手动添加</button>
+                </div>
+              </div>
+              <div class="java-list" id="javaList"></div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">自动分配内存</span>
+                  <span class="field-desc" id="memoryAutoHint">根据当前可用内存实时分配上限</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" id="memoryAutoSwitch" />
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">内存分配</span>
+                  <span class="field-desc">分配给游戏进程的最大内存（关闭自动分配后生效）</span>
+                </div>
+                <div class="field-ctrl">
+                  <input type="range" id="memoryRange" min="2048" max="16384" step="512" value="8192" />
+                  <span class="range-value" id="memoryValue">8 GB</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">默认游戏窗口大小</span>
+                  <span class="field-desc">启动游戏时窗口的初始状态</span>
+                </div>
+                <div class="field-ctrl">
+                  <select id="windowModeSelect">
+                    <option value="launcher">与启动器同样大小</option>
+                    <option value="default">默认</option>
+                    <option value="maximized">最大化</option>
+                    <option value="minimized">最小化</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">新版本首次启动使用中文</span>
+                  <span class="field-desc">自动为新下载的版本写入简体中文语言设置</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" id="autoLangSwitch" checked />
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本隔离</span>
+                  <span class="field-desc">每个版本使用自己的游戏目录，存档、模组、配置互不影响；关闭后所有版本共用数据根目录</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" id="versionIsolationSwitch" checked />
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">启动参数</span>
+                  <span class="field-desc">追加到 JVM 启动命令后的自定义参数</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input" type="text" placeholder="-XX:+UseG1GC" />
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">个性化</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">背景图片</span>
+                  <span class="field-desc" id="bgImageName">正在使用默认渐变背景</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnPickBackground">选择图片</button>
+                  <button class="btn-ghost" type="button" id="btnClearBackground">恢复默认</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">背景模糊度</span>
+                  <span class="field-desc">使用自定义背景图片时生效</span>
+                </div>
+                <div class="field-ctrl">
+                  <input type="range" id="bgBlurRange" min="0" max="24" step="1" value="0" />
+                  <span class="range-value" id="bgBlurValue">0 px</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">主题颜色</span>
+                  <span class="field-desc">影响按钮、开关与各类强调色</span>
+                </div>
+                <div class="field-ctrl">
+                  <div class="theme-swatches" id="themeSwatches"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">启动器</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">数据目录</span>
+                  <span class="field-desc">启动时自动创建，全局设置保存在其中的 MCHL 目录</span>
+                </div>
+                <div class="field-ctrl">
+                  <code class="path" id="dataDirPath">.minecraft</code>
+                  <button class="btn-ghost" type="button" id="btnOpenDataDir">打开</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">默认板块</span>
+                  <span class="field-desc">打开启动器时先显示哪个板块</span>
+                </div>
+                <div class="field-ctrl">
+                  <select id="defaultViewSelect">
+                    <option value="home">首页</option>
+                    <option value="launch">启动</option>
+                    <option value="bedrock">基岩版</option>
+                    <option value="download">下载</option>
+                    <option value="settings">设置</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">界面语言</span>
+                  <span class="field-desc">启动器显示语言</span>
+                </div>
+                <div class="field-ctrl">
+                  <select>
+                    <option>简体中文</option>
+                    <option>English</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">启动后关闭启动器</span>
+                  <span class="field-desc">游戏窗口出现后自动退出启动器</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="track"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">显示启动日志</span>
+                  <span class="field-desc">在启动器中查看游戏输出</span>
+                </div>
+                <div class="field-ctrl">
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="track"></span>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">关于</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">开发者</span>
+                  <span class="field-desc" id="aboutAuthor">幻方者</span>
+                </div>
+                <div class="field-ctrl">
+                  <button class="btn-ghost" type="button" id="btnOpenAuthorPage"
+                          title="https://space.bilibili.com/3546815194467241">哔哩哔哩主页</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本</span>
+                  <span class="field-desc" id="aboutVersion">v1.1.1</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view view-download-detail" data-view="download-detail">
+          <div class="page-head version-head">
+            <div>
+              <h1>下载设置</h1>
+              <p id="dlModalDesc">—</p>
+            </div>
+            <button class="btn-ghost" type="button" id="btnBackFromDownload">返回</button>
+          </div>
+
+          <div class="cards">
+            <section class="card">
+              <h2 class="card-title">下载配置</h2>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">游戏版本</span>
+                  <span class="field-desc">将下载该版本的核心文件</span>
+                </div>
+                <div class="field-ctrl">
+                  <code class="path" id="dlModalVersion">—</code>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field-text">
+                  <span class="field-name">版本名</span>
+                  <span class="field-desc">不能与已有版本重名；安装加载器时原版仍按版本号保存</span>
+                </div>
+                <div class="field-ctrl">
+                  <input class="text-input dl-name-input" id="dlNameInput" type="text" />
+                </div>
+              </div>
+
+              <div class="dl-modal-block">
+                <span class="field-name">模组加载器</span>
+                <span class="field-desc">在下载游戏时一并安装，装好后可直接启动</span>
+                <div class="loader-chips" id="dlLoaderChips"></div>
+              </div>
+
+              <div class="dl-modal-block" id="dlLoaderVersionRow" style="display: none;">
+                <span class="field-name">加载器版本</span>
+                <span class="field-desc">点击选择要安装的加载器版本，最新版本在最上方</span>
+                <div class="dl-version-list" id="dlLoaderVersionList"></div>
+              </div>
+
+              <div class="dl-modal-block" id="dlFabricApiBlock" style="display: none;">
+                <div class="dl-fabric-head">
+                  <div>
+                    <span class="field-name">Fabric API</span>
+                    <span class="field-desc" id="dlFabricApiDesc">正在匹配适配的 Fabric API…</span>
+                  </div>
+                  <label class="switch" title="是否一并下载">
+                    <input type="checkbox" id="dlFabricApiSwitch" checked />
+                    <span class="switch-track"><span class="switch-thumb"></span></span>
+                  </label>
+                </div>
+                <div class="dl-version-list" id="dlFabricApiList"></div>
+              </div>
+
+              <div class="launch-status dl-status" id="dlModalStatus">
+                <span class="ls-text" id="dlModalStatusText"></span>
+                <span class="ls-bar"><i id="dlModalProgressBar"></i></span>
+              </div>
+
+              <div class="vs-actions">
+                <button class="dl-submit" type="button" id="btnStartDownload">开始下载</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- 模组下载设置 -->
+        <section class="view view-mod-detail" data-view="mod-detail">
+          <div class="page-head version-head">
+            <div>
+              <h1 id="modDetailTitle">模组下载</h1>
+              <p id="modDetailSubtitle">—</p>
+            </div>
+            <button class="btn-ghost" type="button" id="btnBackFromMod">返回</button>
+          </div>
+
+          <div class="cards">
+            <section class="card">
+              <div class="mod-head">
+                <div class="mod-head-icon" id="modDetailIcon"></div>
+                <div class="mod-head-text">
+                  <span class="mod-head-name" id="modDetailName">—</span>
+                  <span class="mod-head-desc" id="modDetailDesc">—</span>
+                </div>
+                <span class="mod-tag is-source" id="modDetailSource">—</span>
+              </div>
+
+              <div class="dl-modal-block">
+                <div class="mod-version-head">
+                  <span class="field-name">文件版本</span>
+                  <button class="btn-ghost" type="button" id="btnRefreshModVersions">刷新</button>
+                </div>
+                <div class="loader-chips" id="modDetailLoaderFilters">
+                  <button class="chip is-active" type="button" data-loader="">全部</button>
+                  <button class="chip" type="button" data-loader="fabric">Fabric</button>
+                  <button class="chip" type="button" data-loader="forge">Forge</button>
+                  <button class="chip" type="button" data-loader="neoforge">NeoForge</button>
+                  <button class="chip" type="button" data-loader="quilt">Quilt</button>
+                </div>
+                <span class="field-desc" id="modVersionDesc">点击游戏版本展开，再选择要下载的文件</span>
+                <div class="dl-version-list" id="modVersionList"></div>
+              </div>
+
+              <div class="launch-status dl-status" id="modDetailStatus">
+                <span class="ls-text" id="modDetailStatusText"></span>
+                <span class="ls-bar"><i id="modDetailProgressBar"></i></span>
+              </div>
+
+              <div class="vs-actions">
+                <button class="dl-submit" type="button" id="btnDownloadMod">下载</button>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- 小组件管理 -->
+  <div class="modal" id="widgetModal" aria-hidden="true">
+    <div class="modal-mask" id="widgetMask"></div>
+    <div class="modal-panel modal-panel-widgets" role="dialog" aria-modal="true"
+         aria-labelledby="widgetModalTitle">
+      <header class="modal-head">
+        <h2 id="widgetModalTitle">小组件</h2>
+        <button class="modal-close" type="button" id="widgetClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </header>
+      <p class="widget-modal-hint">点一下卡片即可开关；也可以自己写一段 HTML 当小组件。</p>
+      <div class="widget-picker" id="widgetPicker"></div>
+      <footer class="modal-foot modal-foot-actions">
+        <button class="btn-ghost" type="button" id="btnWidgetReset">恢复默认</button>
+        <button class="btn-ghost" type="button" id="btnWidgetDone">完成</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 自定义 HTML 小组件 -->
+  <div class="modal" id="customWidgetModal" aria-hidden="true">
+    <div class="modal-mask" id="customWidgetMask"></div>
+    <div class="modal-panel modal-panel-custom" role="dialog" aria-modal="true"
+         aria-labelledby="customWidgetTitle">
+      <header class="modal-head">
+        <h2 id="customWidgetTitle">新建自定义小组件</h2>
+        <button class="modal-close" type="button" id="customWidgetClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </header>
+
+      <div class="custom-widget-body">
+        <label class="custom-widget-field">
+          <span class="custom-widget-label">名称</span>
+          <input class="text-input custom-widget-name" id="customWidgetName" type="text"
+                 maxlength="24" placeholder="例如：我的便签" />
+        </label>
+
+        <label class="custom-widget-field custom-widget-field-grow">
+          <span class="custom-widget-label">HTML</span>
+          <textarea class="custom-widget-code" id="customWidgetHtml" spellcheck="false"
+                    placeholder="&lt;h3&gt;下午好&lt;/h3&gt;&lt;p&gt;支持 HTML / CSS / JS&lt;/p&gt;"></textarea>
+        </label>
+
+        <div class="custom-widget-row">
+          <label class="custom-widget-check">
+            <input type="checkbox" id="customWidgetWide" />
+            <span>占用两格宽度</span>
+          </label>
+          <button class="btn-ghost" type="button" id="btnImportCustomHtml">从文件导入</button>
+        </div>
+        <p class="custom-widget-hint">
+          内容在独立的沙箱里运行，不会影响启动器本身；鼠标按住卡片标题可拖动排序。
+        </p>
+      </div>
+
+      <footer class="modal-foot modal-foot-actions">
+        <button class="btn-ghost" type="button" id="btnCustomWidgetCancel">取消</button>
+        <button class="dl-submit" type="button" id="btnCustomWidgetSave">保存</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 启动日志 -->
+  <div class="modal" id="logModal" aria-hidden="true">
+    <div class="modal-mask" id="logMask"></div>
+    <div class="modal-panel modal-panel-log" role="dialog" aria-modal="true"
+         aria-labelledby="logTitle">
+      <header class="modal-head">
+        <h2 id="logTitle">启动日志</h2>
+        <button class="modal-close" type="button" id="logClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </header>
+      <pre class="log-viewer" id="logViewer">正在读取日志…</pre>
+      <footer class="modal-foot log-foot">
+        <span class="log-path" id="logPath"></span>
+        <button class="btn-ghost" type="button" id="btnCopyLog">复制日志</button>
+        <button class="btn-ghost" type="button" id="btnRefreshLog">刷新</button>
+        <button class="btn-ghost" type="button" id="btnOpenLogFolder">打开日志文件夹</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 二次确认 -->
+  <div class="modal" id="confirmModal" aria-hidden="true">
+    <div class="modal-mask" id="confirmMask"></div>
+    <div class="modal-panel modal-panel-confirm" role="dialog" aria-modal="true"
+         aria-labelledby="confirmTitle">
+      <header class="modal-head">
+        <h2 id="confirmTitle">确认操作</h2>
+      </header>
+      <div class="confirm-body" id="confirmText"></div>
+      <div class="confirm-input-row is-collapsed" id="confirmInputRow">
+        <input class="text-input" id="confirmInput" type="text" maxlength="64"
+               placeholder="版本名" />
+      </div>
+      <footer class="modal-foot modal-foot-actions">
+        <button class="btn-ghost" type="button" id="btnConfirmCancel">取消</button>
+        <button class="dl-submit dl-submit-danger" type="button" id="btnConfirmOk">确认</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 微软正版登录（设备码） -->
+  <div class="modal" id="msLoginModal" aria-hidden="true">
+    <div class="modal-mask" id="msLoginMask"></div>
+    <div class="modal-panel modal-panel-confirm" role="dialog" aria-modal="true"
+         aria-labelledby="msLoginTitle">
+      <header class="modal-head">
+        <h2 id="msLoginTitle">微软正版登录</h2>
+        <button class="modal-close" type="button" id="msLoginClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </header>
+      <div class="ms-login-body">
+        <p class="ms-login-tip">在浏览器中打开下面的网址，输入代码并同意授权即可完成登录。</p>
+        <div class="ms-login-code" id="msLoginCode">········</div>
+        <div class="ms-login-actions">
+          <button class="dl-submit" type="button" id="btnMsCopyCode">复制代码</button>
+          <button class="btn-ghost" type="button" id="btnMsOpenUri">打开授权网页</button>
+        </div>
+        <div class="ms-login-uri" id="msLoginUri"></div>
+        <div class="ms-login-status" id="msLoginStatus">正在获取登录码…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三方外置登录（authlib-injector）的表单已内嵌在账号卡片中 -->
+
+  <div class="dl-task" id="dlTaskRoot" hidden>
+    <div class="dl-task-panel" id="dlTaskPanel" hidden>
+      <header class="dl-task-head">
+        <span>下载任务</span>
+        <button class="dl-task-close" type="button" id="dlTaskClose" aria-label="关闭">×</button>
+      </header>
+      <div class="dl-task-list" id="dlTaskList"></div>
+      <footer class="dl-task-foot">
+        <button class="link-btn" type="button" id="dlTaskClear">清除已完成</button>
+      </footer>
+    </div>
+    <button class="dl-task-fab" type="button" id="dlTaskFab"
+            aria-label="下载任务" aria-expanded="false">
+      <svg class="dl-task-ring" viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="dl-task-ring-bg" cx="22" cy="22" r="18" />
+        <circle class="dl-task-ring-fg" id="dlTaskRing" cx="22" cy="22" r="18" />
+      </svg>
+      <span class="dl-task-fab-text" id="dlTaskFabText"></span>
+    </button>
+  </div>
+
+  <button class="kill-game-btn" type="button" id="btnKillGame"
+          title="强制结束游戏进程" aria-label="强制结束游戏进程">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 4.2v6.6" />
+      <path d="M7.2 6.6a7.6 7.6 0 1 0 9.6 0" />
+    </svg>
+  </button>
+
+  <div class="toast-stack" id="toastStack" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
